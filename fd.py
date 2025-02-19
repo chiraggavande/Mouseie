@@ -16,8 +16,6 @@ mp_draw = mp.solutions.drawing_utils
 cap = cv2.VideoCapture(0)
 
 while cap.isOpened():
-    x,y = pyautogui.position()
-    print(x,y)
     ret, frame = cap.read()
     if not ret:
         break
@@ -44,15 +42,25 @@ while cap.isOpened():
             right_eye_x = int(right_eye.x * width)
             nose_x = int(nose.x * width)
 
+            left_eye_dist = nose_x - left_eye_x
+            right_eye_dist = right_eye_x - nose_x
+
+            look_factor = left_eye_dist/right_eye_dist
+
+            print(f"left_eye_x:{left_eye_x} ,nose_x:{nose_x}, right_eye_x:{right_eye_x} , look_factor:{look_factor} ,direction:{direction}")
+
             # Determine head direction
-            if nose_x > left_eye_x:
+            #left
+            if look_factor < 1:
+                 if(direction == "Looking Right"):
+                    mouse.moveTo(res.width//2,res.height//2,duration=0.05)    
+                 direction = "Looking Left"
+            #right    
+            elif look_factor > 1:
                 if(direction == "Looking Left"):
-                    mouse.moveTo(res.width//2,res.height//2,duration=0.05)
+                    mouse.moveTo(res.width//2 + 1920,res.height//2,duration=0.05)    
                 direction = "Looking Right"
-            elif nose_x < right_eye_x:
-                if(direction == "Looking Right"):
-                    mouse.moveTo(2800,500,duration=0.05)
-                direction = "Looking Left"
+               
             else:
                 direction = "Looking Center"
 
