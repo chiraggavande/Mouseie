@@ -12,7 +12,7 @@ This Python project uses OpenCV and MediaPipe to detect a user's face direction 
 
 ## Requirements
 
-Make sure you have Python installed along with the following dependencies:
+Make sure you have Python(3.10) installed along with the following dependencies:
 
 ```sh
 pip install opencv-python mediapipe pyautogui
