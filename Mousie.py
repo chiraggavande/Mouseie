@@ -54,8 +54,9 @@ if(not isCalibrated):
     for _ in range(NO_OF_MONITORS):
         __ = input(f"Please look in the display no. {_} and keep the cursor in the middle of the screen and press enter")
         temp = calibrationData()
-        temp.nose_x = getNose().x
-        temp.nose_y = getNose().y
+        nose  = getNose()
+        temp.nose_x = nose.x
+        temp.nose_y = nose.y
         temp.cursor = pyautogui.position()
 
         CalibrationList.append(temp)
@@ -78,20 +79,20 @@ while cap.isOpened():
     if results.multi_face_landmarks:
         for face_landmarks in results.multi_face_landmarks:
             # Get landmark points
-            height, width, _ = frame.shape
-            left_eye = face_landmarks.landmark[33]   # Right eye in the image (mirrored)
-            right_eye = face_landmarks.landmark[263] # Left eye in the image
+            # height, width = frame.shape
+            # left_eye = face_landmarks.landmark[33]   # Right eye in the image (mirrored)
+            # right_eye = face_landmarks.landmark[263] # Left eye in the image
             nose = face_landmarks.landmark[1]        # Nose tip
 
             # Convert normalized coordinates to pixel values
-            left_eye_x = int(left_eye.x * width)
-            right_eye_x = int(right_eye.x * width)
-            nose_x = int(nose.x * width)
+            # left_eye_x = int(left_eye.x * width)
+            # right_eye_x = int(right_eye.x * width)
+            # nose_x = int(nose.x * width)
 
-            left_eye_dist = nose.x - left_eye.x
-            right_eye_dist = right_eye.x - nose.x
+            # left_eye_dist = nose.x - left_eye.x
+            # right_eye_dist = right_eye.x - nose.x
 
-            look_factor = left_eye_dist/right_eye_dist
+            # look_factor = left_eye_dist/right_eye_dist
 
             #print(CalibrationList[0].nose)
 
@@ -121,13 +122,13 @@ while cap.isOpened():
             #     direction = "Looking Center"
 
             # Draw face landmarks
-            mp_draw.draw_landmarks(frame, face_landmarks, mp_face_mesh.FACEMESH_CONTOURS)
+            #mp_draw.draw_landmarks(frame, face_landmarks, mp_face_mesh.FACEMESH_CONTOURS)
             
             # Display the direction text
-            cv2.putText(frame, direction, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            #cv2.putText(frame, direction, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
     # Show the frame
-    cv2.imshow("Face Direction Detection", frame)
+    #cv2.imshow("Face Direction Detection", frame)
 
     # Exit when 'q' is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
