@@ -1,4 +1,4 @@
-# Face Direction Detection for Multi-Monitor Setup
+# Mouse control for Multi-Monitor Setup
 
 This Python project uses OpenCV and MediaPipe to detect a user's face direction and move the cursor to the appropriate monitor based on nose position calibration. It allows seamless navigation across multiple displays by tracking head movements.
 
@@ -28,6 +28,8 @@ pip install opencv-python mediapipe pyautogui
 3. Look at each display and press Enter when instructed to calibrate.
 4. Once calibration is complete, the program will track head movements and move the cursor accordingly.
 5. Press `q` to exit the program.
+
+You can add the batch file to statup folder in your windows machine to start the application on Start up of your machine
 
 ## How It Works
 
